@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRYPCO × OVALUATE — Insurtech Strategy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8B6914;
+    --navy: #0A1628;
+    --navy2: #0F2040;
+    --navy3: #162B52;
+    --navy4: #1E3A6E;
+    --white: #F8F9FC;
+    --gray: #9BA8BB;
+    --green: #22C55E;
+    --red: #EF4444;
+    --blue: #3B82F6;
+    --purple: #8B5CF6;
+    --teal: #14B8A6;
+    --orange: #F97316;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,22,40,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+  .nav-logo span { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-link {
+    padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; color: var(--gray); border: none; background: none;
+    letter-spacing: 0.5px;
+  }
+  .nav-link:hover, .nav-link.active { color: var(--gold); background: rgba(201,168,76,0.1); }
+  .nav-badge {
+    background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800;
+    padding: 3px 8px; border-radius: 20px; letter-spacing: 1px;
+  }
+
+  section { padding: 80px 0; min-height: 100vh; display: flex; align-items: center; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+  #hero {
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+    min-height: 100vh; padding-top: 60px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px; padding: 6px 16px; margin-bottom: 32px;
+    font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  h1 {
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 900; line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  .hero-sub { font-size: 1.1rem; color: var(--gray); line-height: 1.7; max-width: 650px; margin-bottom: 40px; }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+    background: rgba(201,168,76,0.15); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2); margin-top: 40px;
+  }
+  .hero-stat {
+    background: rgba(10,22,40,0.8); padding: 20px 24px; text-align: center;
+    transition: background 0.2s;
+  }
+  .hero-stat:hover { background: rgba(201,168,76,0.05); }
+  .hero-stat .val { font-size: 1.9rem; font-weight: 800; color: var(--gold); }
+  .hero-stat .lbl { font-size: 11px; color: var(--gray); margin-top: 4px; letter-spacing: 0.5px; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+    color: var(--navy); font-weight: 700; font-size: 13px;
+    padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--gold); font-weight: 600; font-size: 13px;
+    padding: 12px 28px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.4);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); }
+
+  .section-tag {
+    display: inline-block; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 4px; margin-bottom: 16px;
+  }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+  .section-desc { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+  .card {
+    background: rgba(15,32,64,0.6); border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+  #partnerships { background: var(--navy2); }
+  .partnership-flow {
+    display: flex; align-items: center; gap: 0; margin-bottom: 48px;
+    background: rgba(15,32,64,0.8); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 20px; overflow: hidden;
+  }
+  .pf-node {
+    flex: 1; padding: 32px 24px; text-align: center; position: relative;
+  }
+  .pf-node:not(:last-child)::after {
+    content: '→'; position: absolute; right: -12px; top: 50%;
+    transform: translateY(-50%); font-size: 1.5rem; color: var(--gold); z-index: 1;
+  }
+  .pf-icon {
+    width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+  }
+  .pf-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+  .pf-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+  #products { background: var(--navy); }
+  .tab-nav {
+    display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;
+  }
+  .tab-btn {
+    padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: 1px solid transparent; transition: all 0.2s;
+    background: rgba(255,255,255,0.04); color: var(--gray);
+  }
+  .tab-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .tab-btn:hover:not(.active) { border-color: rgba(201,168,76,0.3); color: var(--white); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .product-hero {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(59,130,246,0.05));
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 20px; padding: 40px;
+    margin-bottom: 24px;
+  }
+  .product-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .badge-high { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+  .badge-med { background: rgba(249,115,22,0.15); color: var(--orange); border: 1px solid rgba(249,115,22,0.25); }
+  .badge-new { background: rgba(139,92,246,0.15); color: var(--purple); border: 1px solid rgba(139,92,246,0.25); }
+
+  .product-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+  .product-subtitle { color: var(--gray); font-size: 1rem; line-height: 1.6; margin-bottom: 28px; }
+
+  .metrics-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 32px; }
+  .metric-box {
+    background: rgba(10,22,40,0.6); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 16px; text-align: center;
+  }
+  .metric-val { font-size: 1.4rem; font-weight: 800; color: var(--gold); }
+  .metric-lbl { font-size: 11px; color: var(--gray); margin-top: 4px; }
+
+  #risks { background: var(--navy2); }
+  .risk-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .risk-card {
+    background: rgba(10,22,40,0.7); border-radius: 14px; padding: 24px;
+    border-left: 3px solid; transition: transform 0.2s;
+  }
+  .risk-card:hover { transform: translateX(4px); }
+  .risk-card.high { border-color: var(--red); }
+  .risk-card.med { border-color: var(--orange); }
+  .risk-card.low { border-color: var(--green); }
+  .risk-level { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .risk-card.high .risk-level { color: var(--red); }
+  .risk-card.med .risk-level { color: var(--orange); }
+  .risk-card.low .risk-level { color: var(--green); }
+  .risk-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .risk-desc { font-size: 12px; color: var(--gray); line-height: 1.5; margin-bottom: 12px; }
+  .risk-solution {
+    background: rgba(255,255,255,0.04); border-radius: 8px; padding: 10px 12px;
+    font-size: 11px; color: var(--gold); font-weight: 500;
+  }
+
+  #roadmap { background: var(--navy); }
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg, var(--gold), rgba(201,168,76,0.1));
+  }
+  .timeline-item { position: relative; margin-bottom: 36px; }
+  .timeline-dot {
+    position: absolute; left: -34px; top: 4px; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--gold); border: 3px solid var(--navy);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.3);
+  }
+  .timeline-phase { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .timeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+  .timeline-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+  .timeline-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600;
+    background: rgba(255,255,255,0.06); color: var(--gray); border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  #segments { background: var(--navy2); }
+  .segment-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+  .seg-btn {
+    padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: all 0.2s;
+    font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03); color: var(--gray);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .seg-btn.active { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.3); color: var(--white); }
+  .seg-content { display: none; }
+  .seg-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; animation: fadeIn 0.3s; }
+
+  #recommend { background: var(--navy); }
+  .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .question-block { margin-bottom: 28px; }
+  .q-label { font-size: 13px; font-weight: 600; color: var(--gray); margin-bottom: 10px; }
+  .q-options { display: flex; gap: 8px; flex-wrap: wrap; }
+  .q-opt {
+    padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: var(--gray);
+    transition: all 0.2s;
+  }
+  .q-opt.selected { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); }
+  .rec-result {
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px; padding: 32px; min-height: 300px;
+  }
+  .rec-placeholder { color: var(--gray); text-align: center; padding: 60px 20px; }
+  .rec-placeholder .icon { font-size: 3rem; margin-bottom: 12px; }
+  .rec-output { display: none; }
+  .rec-output.show { display: block; animation: fadeIn 0.4s; }
+  .rec-rank { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .rec-product-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+  .rec-why { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
+  .score-bar-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--gray); }
+  .score-bar-track { background: rgba(255,255,255,0.06); border-radius: 4px; height: 6px; margin-bottom: 10px; }
+  .score-bar-fill { height: 6px; border-radius: 4px; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); transition: width 0.6s ease; }
+
+  #decision { background: var(--navy); }
+  .comparison-table { width: 100%; border-collapse: collapse; }
+  .comparison-table th {
+    background: rgba(201,168,76,0.1); color: var(--gold);
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    padding: 14px 16px; text-align: left; border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .comparison-table td {
+    padding: 14px 16px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+  }
+  .comparison-table tr:hover td { background: rgba(201,168,76,0.04); }
+  .score-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .dot-g { background: var(--green); }
+  .dot-y { background: var(--gold); }
+  .dot-r { background: var(--red); }
+  .priority-badge { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+  .p1 { background: rgba(34,197,94,0.15); color: var(--green); }
+  .p2 { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .p3 { background: rgba(59,130,246,0.15); color: var(--blue); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent); margin: 0; }
+
+  .bar-chart { display: flex; flex-direction: column; gap: 14px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label { width: 160px; font-size: 12px; color: var(--gray); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 8px; }
+  .bar-fill { height: 8px; border-radius: 4px; transition: width 0.8s ease; }
+  .bar-val { width: 40px; font-size: 12px; font-weight: 700; color: var(--white); }
+
+  footer {
+    background: var(--navy); border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 40px 2rem; text-align: center;
+  }
+  .footer-logo { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .footer-note { font-size: 11px; color: var(--gray); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .gold { color: var(--gold); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+
+  .pill-list { display: flex; flex-direction: column; gap: 8px; }
+  .pill-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px 14px;
+    border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.2s;
+  }
+  .pill-item:hover { border-color: rgba(201,168,76,0.2); }
+  .pill-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .pill-text { font-size: 12px; color: var(--gray); line-height: 1.5; }
+  .pill-text strong { color: var(--white); }
+
+  @media (max-width: 768px) {
+    .grid-2,.grid-3,.two-col,.rec-grid,.seg-content.active,.metrics-row { grid-template-columns: 1fr !important; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .partnership-flow { flex-direction: column; }
+    .pf-node:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    <span>PRYPCO × OVALUATE</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="goTo('hero')">Overview</button>
+    <button class="nav-link" onclick="goTo('partnerships')">Partnerships</button>
+    <button class="nav-link" onclick="goTo('products')">Insurtech Products</button>
+    <button class="nav-link" onclick="goTo('risks')">Risk Matrix</button>
+    <button class="nav-link" onclick="goTo('segments')">Segments</button>
+    <button class="nav-link" onclick="goTo('roadmap')">Roadmap</button>
+    <button class="nav-link" onclick="goTo('recommend')">Decision Engine</button>
+    <button class="nav-link" onclick="goTo('decision')">Comparison</button>
+  </div>
+  <div class="nav-badge">CEO BRIEF</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Confidential Strategic Analysis · July 2026</div>
+    <h1>Entering Insurtech<br>Through Ovaluate</h1>
+    <p class="hero-sub">A strategic analysis of insurtech opportunities arising from PRYPCO's partnership with Ovaluate — the AI-powered property valuation platform aligned with RICS &amp; IVS global standards — and how this data advantage can be monetised through insurance products built for lenders, investors, and the broader proptech ecosystem.</p>
+    <div class="cta-row">
+      <button class="btn-primary" onclick="goTo('products')">Explore Insurtech Products →</button>
+      <button class="btn-outline" onclick="goTo('recommend')">Use Decision Engine</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">$2.73B</div><div class="lbl">Mortgages facilitated by PRYPCO</div></div>
+      <div class="hero-stat"><div class="val">10 sec</div><div class="lbl">Ovaluate AI valuation speed</div></div>
+      <div class="hero-stat"><div class="val">200+</div><div class="lbl">Countries with PRYPCO investors</div></div>
+      <div class="hero-stat"><div class="val">~4M</div><div class="lbl">Club Apparel loyalty members</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARTNERSHIPS -->
+<section id="partnerships">
+  <div class="container">
+    <div class="section-tag">Partnership Ecosystem</div>
+    <h2>The Data Advantage Stack</h2>
+    <p class="section-desc">Two strategic partnerships create a unique data flywheel that forms the foundation for insurtech product development.</p>
+    <div class="partnership-flow">
+      <div class="pf-node">
+        <div class="pf-icon" style="background:rgba(201,168,76,0.15)">🏢</div>
+        <div class="pf-name gold">PRYPCO</div>
+        <div class="pf-desc">UAE's leading proptech platform — mortgages, fractional ownership (Blocks), tokenized assets (Mint). DFSA-regulated. $2.73B+ mortgages.</div>
+      </div>
+      <div class="pf-node">
+        <div class="pf-icon" style="background:rgba(59,130,246,0.15)">🤖</div>
+        <div class="pf-name" style="color:var(--blue)">OVALUATE</div>
+        <div class="pf-desc">AI-powered AVM platform. RICS &amp; IVS aligned. 4 revenue streams: SaaS, B2B API, Data Intelligence, B2C Lead Gen. Global expansion roadmap.</div>
+      </div>
+      <div class="pf-node">
+        <div class="pf-icon" style="background:rgba(139,92,246,0.15)">🛍️</div>
+        <div class="pf-name" style="color:var(--purple)">Club Apparel</div>
+        <div class="pf-desc">"Spend to Invest" — ~4M loyalty members convert shopping rewards (up to 15% back) into fractional property stakes from AED 2,000.</div>
+      </div>
+      <div class="pf-node">
+        <div class="pf-icon" style="background:rgba(20,184,166,0.15)">🛡️</div>
+        <div class="pf-name" style="color:var(--teal)">INSURTECH LAYER</div>
+        <div class="pf-desc">The proposed next layer — data-driven insurance products built on Ovaluate's valuation engine + PRYPCO's investor &amp; borrower base.</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-tag" style="margin-bottom:12px">PRYPCO × OVALUATE</div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:14px">World's First AI Valuation Engine for Fractional Real Estate</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">⚡</div><div class="pill-text"><strong>10-second valuations</strong> for both fractional and full ownership properties using real-time market data</div></div>
+          <div class="pill-item"><div class="pill-icon">📋</div><div class="pill-text"><strong>RICS &amp; IVS compliant</strong> — globally recognised reporting standards, critical for lender and regulator acceptance</div></div>
+          <div class="pill-item"><div class="pill-icon">🔗</div><div class="pill-text"><strong>PRYPCO Blocks investors</strong> receive Ovaluate-backed valuations, meaning investment decisions are data-driven from launch</div></div>
+          <div class="pill-item"><div class="pill-icon">🌍</div><div class="pill-text"><strong>Global expansion ambition</strong> — Ovaluate's model is designed to scale across GCC, then emerging markets</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>RICS AI Standard (March 2026)</strong> mandates AI governance registers, human oversight, and PI insurance compliance for all AI valuation outputs</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-tag" style="margin-bottom:12px">PRYPCO × CLUB APPAREL</div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:14px">"Spend to Invest" — Retail-to-Real-Estate Pipeline</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🛒</div><div class="pill-text"><strong>~4M Club Apparel members</strong> across UAE/GCC can convert retail loyalty points into fractional Dubai property stakes</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Entry from AED 2,000</strong> — democratising real estate investment for retail consumers previously excluded from property markets</div></div>
+          <div class="pill-item"><div class="pill-icon">📱</div><div class="pill-text"><strong>App-native journey</strong> — members redeem via PRYPCO Blocks app, blending shopping and investment in one digital experience</div></div>
+          <div class="pill-item"><div class="pill-icon">📈</div><div class="pill-text"><strong>8–10% targeted annual ROI</strong> with monthly rental payouts — compelling alternative to savings accounts for retail investors</div></div>
+          <div class="pill-item"><div class="pill-icon">🔐</div><div class="pill-text"><strong>Insurtech opportunity:</strong> these first-time micro-investors are uninsured, uneducated on property risk, and the ideal target for retail property protection products</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="section-tag">Insurtech Product Suite</div>
+    <h2>6 Products We Can Build</h2>
+    <p class="section-desc">Each product is powered by Ovaluate's valuation data, addressable through PRYPCO's customer channels, and designed to scale globally.</p>
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('p1')">1. AVM Indemnity</button>
+      <button class="tab-btn" onclick="showTab('p2')">2. Fractional PI</button>
+      <button class="tab-btn" onclick="showTab('p3')">3. Lender Protection</button>
+      <button class="tab-btn" onclick="showTab('p4')">4. Loyalty Shield</button>
+      <button class="tab-btn" onclick="showTab('p5')">5. Data Compliance</button>
+      <button class="tab-btn" onclick="showTab('p6')">6. Parametric PropTech</button>
+    </div>
+
+    <div id="p1" class="tab-content active">
+      <div class="product-hero">
+        <div class="product-badge badge-high">★ Top Priority · Highest Fit</div>
+        <div class="product-title">AVM Professional Indemnity Insurance</div>
+        <div class="product-subtitle">Insurance that covers Ovaluate and its B2B API clients against financial loss from AI valuation errors — directly triggered by the new RICS mandatory AI standard (March 2026).</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">RICS</div><div class="metric-lbl">Mandated Coverage</div></div>
+          <div class="metric-box"><div class="metric-val">B2B</div><div class="metric-lbl">Primary Channel</div></div>
+          <div class="metric-box"><div class="metric-val">High</div><div class="metric-lbl">Revenue Potential</div></div>
+          <div class="metric-box"><div class="metric-val">Q1 '27</div><div class="metric-lbl">Target Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Why This Product Exists</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">⚖️</div><div class="pill-text">RICS AI Standard (effective March 9, 2026) mandates ALL RICS-affiliated firms using AI for valuations to maintain a written register, governance documentation, and named human oversight — creating audit trail and liability exposure</div></div>
+            <div class="pill-item"><div class="pill-icon">🔍</div><div class="pill-text">PI insurers must now evaluate how AI governance, transparency practices, and compliance documentation affect risk and coverage — creating a new PI sub-product category</div></div>
+            <div class="pill-item"><div class="pill-icon">🏦</div><div class="pill-text">Ovaluate's B2B API clients (banks, lenders, developers) who rely on AI valuations for lending decisions carry downstream liability if valuations prove materially inaccurate</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Product Design</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Coverage A — Valuation Error:</strong> Compensates lender/investor for loss when Ovaluate AVM output deviates &gt;X% from eventual sale/appraisal price</div></div>
+            <div class="pill-item"><div class="pill-icon">📄</div><div class="pill-text"><strong>Coverage B — Regulatory Non-Compliance:</strong> Covers legal/remediation costs if RICS audit reveals AI governance gaps in client firm</div></div>
+            <div class="pill-item"><div class="pill-icon">🔗</div><div class="pill-text"><strong>API-Embedded:</strong> Every Ovaluate B2B API call optionally bundles a micro-premium for indemnity — seamless SaaS-native distribution</div></div>
+            <div class="pill-item"><div class="pill-icon">💡</div><div class="pill-text"><strong>Pricing model:</strong> % of property value × confidence band × property type risk factor — all computable from Ovaluate's own data</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="p2" class="tab-content">
+      <div class="product-hero">
+        <div class="product-badge badge-high">★ High Priority · Unique Market Position</div>
+        <div class="product-title">Fractional Ownership Investment Protection</div>
+        <div class="product-subtitle">First-in-market insurance product protecting PRYPCO Blocks investors — retail micro-investors who own fractions of Dubai properties — against rental income loss, property value decline, and platform risk.</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">B2C</div><div class="metric-lbl">Target Segment</div></div>
+          <div class="metric-box"><div class="metric-val">AED 500</div><div class="metric-lbl">Min. Investment Unit</div></div>
+          <div class="metric-box"><div class="metric-val">~4M</div><div class="metric-lbl">Addressable via Apparel</div></div>
+          <div class="metric-box"><div class="metric-val">Q2 '27</div><div class="metric-lbl">Target Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">The Gap This Fills</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">👤</div><div class="pill-text">PRYPCO Blocks investors are predominantly <strong>first-time property investors</strong> — retail consumers via Club Apparel who converted loyalty points. They have no existing property insurance knowledge or coverage.</div></div>
+            <div class="pill-item"><div class="pill-icon">📉</div><div class="pill-text">Standard property insurance doesn't cover <strong>fractional ownership risk</strong> — there's no product that protects a 0.2% stake in a Dubai rental apartment against rental income shortfalls</div></div>
+            <div class="pill-item"><div class="pill-icon">🌍</div><div class="pill-text">Investors from 200+ countries own fractions — <strong>cross-border insurance complexity</strong> creates a genuine white space that a digital-first product can uniquely address</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Coverage Structure</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🏠</div><div class="pill-text"><strong>Rental Income Protection:</strong> Compensates investor's proportional share of rental income for up to 6 months if property sits vacant</div></div>
+            <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Valuation Guarantee:</strong> Ovaluate-powered — if property value declines &gt;15% from purchase valuation within 3 years, investor receives partial capital protection payout</div></div>
+            <div class="pill-item"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Parametric Trigger:</strong> Automated payout when Ovaluate's real-time AVM drops below threshold — no claims process, instant settlement</div></div>
+            <div class="pill-item"><div class="pill-icon">💳</div><div class="pill-text"><strong>Bundled at checkout:</strong> Offered as an optional add-on when purchasing blocks via PRYPCO Blocks app — micro-premium proportional to stake size</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="p3" class="tab-content">
+      <div class="product-hero">
+        <div class="product-badge badge-high">★ High Revenue · Lender Segment</div>
+        <div class="product-title">Mortgage Valuation &amp; Lender Protection Suite</div>
+        <div class="product-subtitle">PRYPCO has facilitated $2.73B in mortgages. Ovaluate powers valuations for those mortgage decisions. This product insures lenders against losses when AI-powered valuations underpin mortgage approvals that subsequently default or prove inaccurate.</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">$2.73B</div><div class="metric-lbl">Mortgage pipeline</div></div>
+          <div class="metric-box"><div class="metric-val">B2B</div><div class="metric-lbl">Banks &amp; Lenders</div></div>
+          <div class="metric-box"><div class="metric-val">High</div><div class="metric-lbl">Premium Potential</div></div>
+          <div class="metric-box"><div class="metric-val">Q3 '27</div><div class="metric-lbl">Target Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Why Lenders Need This</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🏦</div><div class="pill-text">When lenders rely on Ovaluate AVM data to approve a mortgage, they carry risk that the AI-derived LTV was inaccurate — especially critical as RERA mandates human appraisals for high-value cases but AI is increasingly used for pre-approval decisioning</div></div>
+            <div class="pill-item"><div class="pill-icon">📉</div><div class="pill-text">In a property downturn, if a mortgage was approved based on an AI valuation that proved 20% too high, the lender's collateral is materially undersecured</div></div>
+            <div class="pill-item"><div class="pill-icon">⚖️</div><div class="pill-text">Regulatory landscape (RICS AI Standard, RERA compliance) is tightening — lenders need insurance that covers AI governance gaps, not just property defaults</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Product Structure</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🔐</div><div class="pill-text"><strong>AVM Accuracy Guarantee:</strong> Ovaluate certifies its own output accuracy; insurtech product covers lender losses if actual sale price deviates beyond agreed band</div></div>
+            <div class="pill-item"><div class="pill-icon">📋</div><div class="pill-text"><strong>Mortgage Default Top-Up:</strong> Layered over standard LMI — specifically covers the valuation-risk component of mortgage defaults, not general credit risk</div></div>
+            <div class="pill-item"><div class="pill-icon">🤝</div><div class="pill-text"><strong>Distribution:</strong> Embedded into Ovaluate's B2B API — when a lender calls the API for a valuation, they optionally receive a guarantee certificate with the report</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="p4" class="tab-content">
+      <div class="product-hero">
+        <div class="product-badge badge-med">Medium Priority · New Consumer Segment</div>
+        <div class="product-title">Loyalty Investor Shield (Club Apparel × PRYPCO)</div>
+        <div class="product-subtitle">Micro-insurance for the "Spend to Invest" consumer segment — retail shoppers who've converted loyalty points into property stakes and represent a completely new, underserved insurance segment.</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">~4M</div><div class="metric-lbl">Club Apparel Members</div></div>
+          <div class="metric-box"><div class="metric-val">AED 2K</div><div class="metric-lbl">Min. Entry Point</div></div>
+          <div class="metric-box"><div class="metric-val">B2C</div><div class="metric-lbl">Consumer-Facing</div></div>
+          <div class="metric-box"><div class="metric-val">Q2 '27</div><div class="metric-lbl">Target Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Unique Opportunity</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🛍️</div><div class="pill-text">Club Apparel's ~4M members have <strong>no property investment background</strong> — they're retail consumers. When they convert shopping rewards into property fractions, they have zero risk awareness and zero protection</div></div>
+            <div class="pill-item"><div class="pill-icon">💡</div><div class="pill-text">This is a <strong>captive, warm audience</strong> already inside the PRYPCO Blocks app — insurance can be offered at the moment of investment with zero cold-acquisition cost</div></div>
+            <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text">Ovaluate provides real-time valuation data on the exact properties these members own fractions of — <strong>pricing is data-perfect, not estimated</strong></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Product Features</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🌟</div><div class="pill-text"><strong>Rewards Capital Shield:</strong> If property value declines, ensure investor recovers at minimum the AED equivalent of loyalty points converted — protecting the "reward" concept</div></div>
+            <div class="pill-item"><div class="pill-icon">📅</div><div class="pill-text"><strong>Monthly Rental Guarantee:</strong> Covers 2 months of missed rental payout (their proportional share) — presented as a "rental assurance" feature</div></div>
+            <div class="pill-item"><div class="pill-icon">🎯</div><div class="pill-text"><strong>Gamified micro-premiums:</strong> Earn "insurance points" through shopping at Club Apparel — reinvested as micro-premiums, creating a circular loyalty-insurance loop</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="p5" class="tab-content">
+      <div class="product-hero">
+        <div class="product-badge badge-new">Emerging · Regulatory Tailwind</div>
+        <div class="product-title">AI Valuation Compliance &amp; Governance Insurance</div>
+        <div class="product-subtitle">As RICS mandates AI registers and documentation for all AI-assisted valuations (effective March 2026), SaaS companies and their enterprise clients face new compliance liability. This product insures that exposure.</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">March '26</div><div class="metric-lbl">RICS AI Standard Live</div></div>
+          <div class="metric-box"><div class="metric-val">Global</div><div class="metric-lbl">Applies to All RICS Firms</div></div>
+          <div class="metric-box"><div class="metric-val">B2B SaaS</div><div class="metric-lbl">Target Channel</div></div>
+          <div class="metric-box"><div class="metric-val">Q4 '27</div><div class="metric-lbl">Target Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">The Regulatory Gap</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">📜</div><div class="pill-text">RICS now requires firms to maintain a <strong>written register of all AI systems</strong> with purpose, first-use date, review dates, AND written professional judgment by a named qualified surveyor — creating audit risk</div></div>
+            <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text">Ovaluate's enterprise SaaS subscribers become responsible for compliance if they use Ovaluate as their AI valuation tool — most are not RICS experts</div></div>
+            <div class="pill-item"><div class="pill-icon">🌍</div><div class="pill-text">As Ovaluate expands globally, every new market brings different regulatory requirements — a <strong>regulatory compliance insurance layer</strong> removes friction for enterprise adoption</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Product Architecture</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🔐</div><div class="pill-text"><strong>Compliance Guarantee:</strong> Ovaluate embeds compliance documentation generation into its SaaS — insurance covers regulatory fines or remediation costs from AI governance failures</div></div>
+            <div class="pill-item"><div class="pill-icon">🤝</div><div class="pill-text"><strong>Bundled with SaaS Tiers:</strong> Enterprise tier includes compliance insurance as part of the subscription — differentiating Ovaluate's SaaS from competitors</div></div>
+            <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Data Intelligence add-on:</strong> For government and institutional clients, compliance insurance covers the use of AI-derived data in policy-making decisions</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="p6" class="tab-content">
+      <div class="product-hero">
+        <div class="product-badge badge-new">Innovative · Future-Forward</div>
+        <div class="product-title">Parametric Real Estate Insurance Platform</div>
+        <div class="product-subtitle">Use Ovaluate's real-time AVM data as the parametric trigger for a fully automated property insurance platform — instant payouts when market conditions breach predefined thresholds, no claims process required.</div>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="metric-val">Real-time</div><div class="metric-lbl">Data Trigger</div></div>
+          <div class="metric-box"><div class="metric-val">0 sec</div><div class="metric-lbl">Claims Process</div></div>
+          <div class="metric-box"><div class="metric-val">Global</div><div class="metric-lbl">Scale Potential</div></div>
+          <div class="metric-box"><div class="metric-val">2028</div><div class="metric-lbl">Full Launch</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">The Innovation Thesis</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">⚡</div><div class="pill-text">Ovaluate generates real-time valuations every time a query is made — creating a <strong>continuous valuation stream</strong> for any property: the ideal parametric insurance trigger</div></div>
+            <div class="pill-item"><div class="pill-icon">🤖</div><div class="pill-text">Traditional property insurance requires surveyors, claims adjusters, weeks of processing. <strong>Parametric insurance pays instantly</strong> when the Ovaluate AVM crosses a predefined threshold</div></div>
+            <div class="pill-item"><div class="pill-icon">🌍</div><div class="pill-text">As Ovaluate globalises, this becomes a <strong>global parametric property insurance platform</strong> — the first to use live AI valuations as the claims trigger at scale</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Use Cases</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">📉</div><div class="pill-text"><strong>Market Decline Protection:</strong> Investor receives payout automatically if Ovaluate AVM for their property drops &gt;10% in a 12-month window</div></div>
+            <div class="pill-item"><div class="pill-icon">🏗️</div><div class="pill-text"><strong>Development Risk:</strong> Developer insures off-plan valuations — if market value at handover is below pre-launch AVM, insurance bridge pays the gap</div></div>
+            <div class="pill-item"><div class="pill-icon">🏦</div><div class="pill-text"><strong>Mortgage LTV Trigger:</strong> Lender receives automatic alert + partial payout if ongoing Ovaluate monitoring shows a mortgaged property's LTV has eroded beyond covenant breach</div></div>
+            <div class="pill-item"><div class="pill-icon">🌐</div><div class="pill-text"><strong>Cross-border investor coverage:</strong> PRYPCO's 200+ country investor base can hold parametric coverage on Dubai properties regardless of their home country insurance market access</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RISKS -->
+<section id="risks">
+  <div class="container">
+    <div class="section-tag">Risk Analysis</div>
+    <h2>Risks That Create the Opportunity</h2>
+    <p class="section-desc">Every risk in the AI valuation &amp; fractional ownership ecosystem is a product opportunity. The higher the risk, the more valuable the insurance.</p>
+    <div class="risk-grid">
+      <div class="risk-card high"><div class="risk-level">⬛ Critical Risk</div><div class="risk-name">AI Valuation Inaccuracy</div><div class="risk-desc">AVM outputs can deviate significantly from actual market prices — especially in thin, illiquid, or unique property segments. JLL explicitly states AI "does not replace human judgment."</div><div class="risk-solution">→ Product 1: AVM Professional Indemnity<br>→ Product 3: Lender Protection Suite</div></div>
+      <div class="risk-card high"><div class="risk-level">⬛ Critical Risk</div><div class="risk-name">RICS AI Regulatory Non-Compliance</div><div class="risk-desc">RICS AI Standard (March 2026) mandates AI registers, human oversight, signed professional judgments. Non-compliance exposes Ovaluate and its clients to regulatory action globally.</div><div class="risk-solution">→ Product 5: Compliance &amp; Governance Insurance</div></div>
+      <div class="risk-card high"><div class="risk-level">⬛ Critical Risk</div><div class="risk-name">Fractional Investor Concentration</div><div class="risk-desc">Retail investors with no property expertise (e.g. Club Apparel members converting loyalty points) are exposed to property market risk with no insurance safety net — a reputational risk for PRYPCO.</div><div class="risk-solution">→ Product 2: Fractional Ownership Protection<br>→ Product 4: Loyalty Investor Shield</div></div>
+      <div class="risk-card med"><div class="risk-level">▨ High Risk</div><div class="risk-name">Lender Collateral Erosion</div><div class="risk-desc">Banks using Ovaluate's B2B API to make mortgage decisions carry risk that AI-derived LTV ratios are inaccurate. In a downturn, this creates systemic collateral shortfall.</div><div class="risk-solution">→ Product 3: Mortgage Valuation &amp; Lender Protection</div></div>
+      <div class="risk-card med"><div class="risk-level">▨ High Risk</div><div class="risk-name">Data Quality &amp; AVM Model Drift</div><div class="risk-desc">AVM accuracy is entirely dependent on data quality, recency, and model calibration. Model drift in changing markets creates systematic under/over-valuation risks.</div><div class="risk-solution">→ Product 1: AVM PI (model monitoring clause)<br>→ Product 6: Parametric trigger reliability</div></div>
+      <div class="risk-card med"><div class="risk-level">▨ High Risk</div><div class="risk-name">Cross-Border Regulatory Complexity</div><div class="risk-desc">As Ovaluate expands globally, different jurisdictions have conflicting AI, property, and financial regulations. What's compliant in UAE may not be accepted in EU, UK, or APAC.</div><div class="risk-solution">→ Product 5: Multi-jurisdiction compliance insurance layer</div></div>
+      <div class="risk-card low"><div class="risk-level">▫ Moderate Risk</div><div class="risk-name">Rental Income Volatility</div><div class="risk-desc">PRYPCO Blocks investors depend on monthly rental payouts from Dubai properties. Market vacancy rates, economic shocks, or specific property issues can disrupt payouts.</div><div class="risk-solution">→ Product 2 &amp; 4: Rental income guarantee features</div></div>
+      <div class="risk-card low"><div class="risk-level">▫ Moderate Risk</div><div class="risk-name">Platform / Counterparty Risk</div><div class="risk-desc">Investors in PRYPCO Blocks face platform-level risk. No structural protection currently exists for fractional investors if PRYPCO ceases operations.</div><div class="risk-solution">→ Product 2: Platform protection clause<br>→ Product 4: DFSA-backed ring-fencing insurance</div></div>
+      <div class="risk-card low"><div class="risk-level">▫ Moderate Risk</div><div class="risk-name">Tokenisation &amp; Legal Ambiguity</div><div class="risk-desc">PRYPCO Mint is a tokenised fractional ownership platform. Legal frameworks for tokenised real estate are nascent in most jurisdictions — disputes may have unclear resolution paths.</div><div class="risk-solution">→ Legal expense insurance product for tokenised asset disputes</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEGMENTS -->
+<section id="segments">
+  <div class="container">
+    <div class="section-tag">Customer Segments</div>
+    <h2>Who We're Building For</h2>
+    <p class="section-desc">Each segment has distinct risk profiles, insurance literacy levels, and product preferences — requiring tailored approaches.</p>
+    <div class="segment-tabs">
+      <button class="seg-btn active" onclick="showSeg('seg1')">🏦 Lenders &amp; Banks</button>
+      <button class="seg-btn" onclick="showSeg('seg2')">👤 Retail Investors</button>
+      <button class="seg-btn" onclick="showSeg('seg3')">🏛️ Government</button>
+      <button class="seg-btn" onclick="showSeg('seg4')">💼 SaaS Subscribers</button>
+      <button class="seg-btn" onclick="showSeg('seg5')">🏗️ Developers</button>
+    </div>
+    <div id="seg1" class="seg-content active">
+      <div class="card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">🏦 Lenders &amp; Mortgage Banks</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Profile:</strong> UAE and GCC banks using Ovaluate's B2B API for mortgage pre-approvals, property assessment, and LTV calculations. They process PRYPCO's $2.73B+ mortgage pipeline.</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>Key Risks:</strong> AI valuation inaccuracy creating under-secured mortgages; regulatory exposure from RICS AI Standard; collateral erosion in market downturns</div></div>
+          <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Best Products:</strong> Product 1 (AVM PI Insurance), Product 3 (Mortgage Lender Protection), Product 5 (Compliance Insurance)</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Revenue Model:</strong> High-value B2B contracts; premium as % of mortgage book insured; bundled with Ovaluate API subscription</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Revenue Potential</h4>
+        <div class="bar-chart" style="margin-bottom:24px">
+          <div class="bar-row"><div class="bar-label">Premium per bank</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--gold)"></div></div><div class="bar-val">High</div></div>
+          <div class="bar-row"><div class="bar-label">Deal cycle</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--orange)"></div></div><div class="bar-val">Long</div></div>
+          <div class="bar-row"><div class="bar-label">Addressable size</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:var(--blue)"></div></div><div class="bar-val">Large</div></div>
+          <div class="bar-row"><div class="bar-label">Reinsurance need</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--red)"></div></div><div class="bar-val">Very High</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);line-height:1.6">Lenders represent the highest-premium segment but require reinsurance partnerships and regulatory approvals. Best approached after establishing product credibility with smaller segments.</div>
+      </div>
+    </div>
+    <div id="seg2" class="seg-content">
+      <div class="card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">👤 Retail &amp; Micro-Investors</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🛍️</div><div class="pill-text"><strong>Profile:</strong> Club Apparel's ~4M members converting loyalty points into PRYPCO Blocks fractions (from AED 2,000). First-time property investors with no risk management experience.</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>Key Risks:</strong> Property value decline, rental income loss, platform risk, no insurance literacy, cross-border complexity (investors from 200+ countries)</div></div>
+          <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Best Products:</strong> Product 2 (Fractional Ownership Protection), Product 4 (Loyalty Investor Shield), Product 6 (Parametric)</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Revenue Model:</strong> Micro-premium per block purchased; bundled into Blocks app checkout; gamified through Apparel reward points</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Why Start Here</h4>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🎯</div><div class="pill-text"><strong>Captive audience:</strong> They're already in the PRYPCO Blocks app. Zero customer acquisition cost — just an in-app upsell at the point of block purchase.</div></div>
+          <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Perfect data:</strong> Ovaluate knows exactly what each property is worth in real time. Pricing is actuarially sound from day one — no guesswork.</div></div>
+          <div class="pill-item"><div class="pill-icon">🚀</div><div class="pill-text"><strong>Volume at scale:</strong> Micro-premiums × millions of members = significant aggregate premium pool. Even 10% penetration of Club Apparel members is 400,000 policies.</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="seg3" class="seg-content">
+      <div class="card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">🏛️ Government &amp; Public Institutions</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Profile:</strong> UAE government bodies (Dubai Land Department, RERA), sovereign wealth funds, urban planning authorities using Ovaluate's Data Intelligence product for policy decisions</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>Key Risks:</strong> AI-derived data used in regulatory decisions that prove inaccurate; policy decisions based on flawed valuations; cross-jurisdictional data governance exposure</div></div>
+          <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Best Products:</strong> Product 5 (Compliance Insurance), Data Intelligence liability coverage, Policy decision indemnity</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Revenue Model:</strong> Annual government contract; included in Ovaluate's government Data Intelligence tier; high credibility but long procurement cycles</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Strategic Value Beyond Revenue</h4>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🏆</div><div class="pill-text">Government adoption signals <strong>regulatory acceptance</strong> of AI valuations — removes the biggest barrier to lender adoption</div></div>
+          <div class="pill-item"><div class="pill-icon">🌍</div><div class="pill-text">UAE government relationships accelerate Ovaluate's <strong>global expansion</strong> — other governments follow UAE's lead in proptech innovation</div></div>
+          <div class="pill-item"><div class="pill-icon">🔐</div><div class="pill-text">DLD/RERA endorsement creates a <strong>de facto standard</strong> for AI valuation insurance in the GCC</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="seg4" class="seg-content">
+      <div class="card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">💼 B2B SaaS Subscribers</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">💻</div><div class="pill-text"><strong>Profile:</strong> PropTech companies, real estate agencies, property management firms, and corporate real estate teams subscribing to Ovaluate's SaaS platform</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>Key Risks:</strong> Using AI valuations in client-facing proposals; regulatory compliance under RICS AI Standard; E&amp;O from AI-assisted advisory services</div></div>
+          <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Best Products:</strong> Product 1 (AVM PI), Product 5 (Compliance), E&amp;O insurance bundled with SaaS tier</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Revenue Model:</strong> Insurance premium as part of SaaS subscription tier pricing; scales with Ovaluate's subscriber growth</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">SaaS-Native Distribution</h4>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🔗</div><div class="pill-text">Insurance embedded directly into Ovaluate's SaaS subscription tiers — <strong>zero additional sales effort</strong>, insurance is part of the product, not an add-on</div></div>
+          <div class="pill-item"><div class="pill-icon">📈</div><div class="pill-text">As Ovaluate's subscriber base grows, so does the insurance pool — <strong>revenue scales with Ovaluate's growth</strong> without separate go-to-market investment</div></div>
+          <div class="pill-item"><div class="pill-icon">🎯</div><div class="pill-text">Differentiation: Ovaluate becomes the <strong>only AI valuation SaaS with built-in regulatory compliance insurance</strong> — a key enterprise sales advantage</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="seg5" class="seg-content">
+      <div class="card">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">🏗️ Developers &amp; Institutional Investors</h3>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">🏢</div><div class="pill-text"><strong>Profile:</strong> UAE and GCC real estate developers using Ovaluate valuations for off-plan sales, project financing, and portfolio management</div></div>
+          <div class="pill-item"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>Key Risks:</strong> Off-plan valuation risk; portfolio valuation drift; fund reporting accuracy; investor relations liability</div></div>
+          <div class="pill-item"><div class="pill-icon">🛡️</div><div class="pill-text"><strong>Best Products:</strong> Product 6 (Parametric PropTech), Product 3 (modified for developer financing), development completion insurance with Ovaluate-linked triggers</div></div>
+          <div class="pill-item"><div class="pill-icon">💰</div><div class="pill-text"><strong>Revenue Model:</strong> Project-level insurance tied to development value; fund-level AUM percentage premium; typically high-value, bespoke contracts</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Parametric Edge for Developers</h4>
+        <div class="pill-list">
+          <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text">Off-plan developments are priced based on Ovaluate valuations at launch. By delivery (18–36 months later), market has moved. <strong>Parametric insurance bridges the gap</strong> — automatic payout if delivered market value &lt; launch AVM.</div></div>
+          <div class="pill-item"><div class="pill-icon">🏦</div><div class="pill-text">Project financing banks require collateral assurance. Ovaluate-backed parametric insurance provides a <strong>bankable guarantee</strong> — potentially reducing cost of capital.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-tag">Development Roadmap</div>
+    <h2>Path to Market</h2>
+    <p class="section-desc">A phased approach — starting with the highest-fit, lowest-friction product and building toward the global parametric platform.</p>
+    <div class="two-col">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Phase 1 · Q1 2027</div>
+          <div class="timeline-title">AVM Professional Indemnity (MVP)</div>
+          <div class="timeline-desc">Launch PI insurance product for Ovaluate's B2B API clients — banks and lenders using AI valuations for mortgage decisions. Leverage RICS AI Standard as the forcing function. Partner with a reinsurer for capacity.</div>
+          <div class="timeline-tags"><span class="tag">B2B API</span><span class="tag">RICS Aligned</span><span class="tag">Reinsurer Partnership</span><span class="tag">UAE First</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Phase 2 · Q2 2027</div>
+          <div class="timeline-title">Fractional Ownership Protection + Loyalty Shield</div>
+          <div class="timeline-desc">Launch consumer-facing products for PRYPCO Blocks investors — embedded in the Blocks app checkout flow. Simultaneously launch Club Apparel "Loyalty Shield" to the ~4M member base via the existing Spend to Invest journey.</div>
+          <div class="timeline-tags"><span class="tag">B2C</span><span class="tag">In-App</span><span class="tag">Club Apparel</span><span class="tag">Micro-premium</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Phase 3 · Q4 2027</div>
+          <div class="timeline-title">SaaS Compliance Insurance &amp; Lender Suite</div>
+          <div class="timeline-desc">Embed compliance insurance into Ovaluate's SaaS subscription tiers. Launch the full Lender Protection Suite for mortgage banks. Begin government and institutional conversations.</div>
+          <div class="timeline-tags"><span class="tag">SaaS Embedded</span><span class="tag">Enterprise</span><span class="tag">Govt Relations</span></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Phase 4 · 2028+</div>
+          <div class="timeline-title">Parametric PropTech Platform + Global Expansion</div>
+          <div class="timeline-desc">Build the full parametric real estate insurance platform using Ovaluate's real-time AVM data as the claims trigger. Follow Ovaluate's global expansion roadmap — launch in KSA, Egypt, India, and beyond as Ovaluate enters each market.</div>
+          <div class="timeline-tags"><span class="tag">Parametric</span><span class="tag">Global</span><span class="tag">Platform Play</span><span class="tag">Series B Ready</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:20px">
+          <h4 style="color:var(--gold);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px">What We Need to Start</h4>
+          <div class="pill-list">
+            <div class="pill-item"><div class="pill-icon">🤝</div><div class="pill-text"><strong>Reinsurance Partner:</strong> Munich Re, Swiss Re or Hannover Re — capacity for AI valuation risk is an emerging specialty line</div></div>
+            <div class="pill-item"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>DFSA Insurance License:</strong> PRYPCO is already DFSA-regulated — applying for insurance intermediary license is a natural extension within DIFC</div></div>
+            <div class="pill-item"><div class="pill-icon">🔗</div><div class="pill-text"><strong>Ovaluate API Integration:</strong> Build the parametric trigger mechanism — real-time AVM data feeds directly into policy management system</div></div>
+            <div class="pill-item"><div class="pill-icon">📊</div><div class="pill-text"><strong>Actuarial Data:</strong> 12–18 months of Ovaluate AVM accuracy data vs. actual transactions — needed to calibrate pricing models</div></div>
+            <div class="pill-item"><div class="pill-icon">🏗️</div><div class="pill-text"><strong>Build vs. Partner:</strong> Recommend white-labelling an existing insurtech policy management platform (e.g. Majesco, INSTANDA) rather than building from scratch</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4 style="color:var(--gold);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px">Revenue Projections (Conservative)</h4>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">2027 (Phase 1–2)</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--teal)"></div></div><div class="bar-val">$2M</div></div>
+            <div class="bar-row"><div class="bar-label">2028 (Phase 3)</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:var(--teal)"></div></div><div class="bar-val">$8M</div></div>
+            <div class="bar-row"><div class="bar-label">2029 (Global)</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--gold)"></div></div><div class="bar-val">$25M</div></div>
+            <div class="bar-row"><div class="bar-label">2030 (Platform)</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--gold)"></div></div><div class="bar-val">$70M+</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DECISION ENGINE -->
+<section id="recommend">
+  <div class="container">
+    <div class="section-tag">AI Decision Engine</div>
+    <h2>Find Your Best First Product</h2>
+    <p class="section-desc">Answer three questions to get a ranked recommendation on which insurtech product to prioritise first.</p>
+    <div class="rec-grid">
+      <div>
+        <div class="question-block">
+          <div class="q-label">What is PRYPCO's primary objective right now?</div>
+          <div class="q-options">
+            <div class="q-opt" onclick="selectOpt(this,'obj','revenue')">Revenue fast</div>
+            <div class="q-opt" onclick="selectOpt(this,'obj','brand')">Brand differentiation</div>
+            <div class="q-opt" onclick="selectOpt(this,'obj','global')">Global expansion enabler</div>
+            <div class="q-opt" onclick="selectOpt(this,'obj','b2b')">Strengthen B2B relationships</div>
+          </div>
+        </div>
+        <div class="question-block">
+          <div class="q-label">Which customer segment is the priority?</div>
+          <div class="q-options">
+            <div class="q-opt" onclick="selectOpt(this,'seg','retail')">Retail investors (Blocks/Apparel)</div>
+            <div class="q-opt" onclick="selectOpt(this,'seg','lender')">Lenders &amp; banks</div>
+            <div class="q-opt" onclick="selectOpt(this,'seg','b2b')">B2B SaaS clients</div>
+            <div class="q-opt" onclick="selectOpt(this,'seg','govt')">Government &amp; institutions</div>
+          </div>
+        </div>
+        <div class="question-block">
+          <div class="q-label">Preferred time to first revenue?</div>
+          <div class="q-options">
+            <div class="q-opt" onclick="selectOpt(this,'time','fast')">6–12 months</div>
+            <div class="q-opt" onclick="selectOpt(this,'time','mid')">12–24 months</div>
+            <div class="q-opt" onclick="selectOpt(this,'time','long')">24+ months (build it right)</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="runRecommendation()" style="width:100%;margin-top:8px">Get My Recommendation →</button>
+      </div>
+      <div class="rec-result">
+        <div class="rec-placeholder" id="rec-placeholder">
+          <div class="icon">🎯</div>
+          <div style="font-size:14px;margin-bottom:8px">Answer the questions to get a personalised recommendation</div>
+          <div style="font-size:12px">Based on research-verified data from Ovaluate &amp; PRYPCO</div>
+        </div>
+        <div class="rec-output" id="rec-output">
+          <div class="rec-rank">#1 Recommended Product</div>
+          <div class="rec-product-name" id="rec-name"></div>
+          <div class="rec-why" id="rec-why"></div>
+          <div id="rec-scores"></div>
+          <div id="rec-next" style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section id="decision">
+  <div class="container">
+    <div class="section-tag">Product Comparison</div>
+    <h2>Side-by-Side Analysis</h2>
+    <p class="section-desc">All six insurtech products compared across the dimensions that matter most for investment decision-making.</p>
+    <div style="overflow-x:auto">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Product</th><th>Market Fit</th><th>Speed to Market</th><th>Revenue Potential</th><th>Ovaluate Dependency</th><th>Complexity</th><th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>AVM Professional Indemnity</strong></td><td><span class="score-dot dot-g"></span>Very High — RICS mandated</td><td><span class="score-dot dot-y"></span>12–18 months</td><td><span class="score-dot dot-g"></span>High (B2B premiums)</td><td><span class="score-dot dot-g"></span>Core — API data</td><td><span class="score-dot dot-y"></span>Medium</td><td><span class="priority-badge p1">P1</span></td></tr>
+        <tr><td><strong>Fractional Ownership Protection</strong></td><td><span class="score-dot dot-g"></span>High — first in market</td><td><span class="score-dot dot-g"></span>6–12 months</td><td><span class="score-dot dot-g"></span>High (volume × micro)</td><td><span class="score-dot dot-g"></span>Core — AVM trigger</td><td><span class="score-dot dot-g"></span>Low–Medium</td><td><span class="priority-badge p1">P1</span></td></tr>
+        <tr><td><strong>Mortgage Lender Protection</strong></td><td><span class="score-dot dot-g"></span>High — $2.73B pipeline</td><td><span class="score-dot dot-r"></span>18–24 months</td><td><span class="score-dot dot-g"></span>Very High</td><td><span class="score-dot dot-g"></span>Core — LTV data</td><td><span class="score-dot dot-r"></span>High</td><td><span class="priority-badge p2">P2</span></td></tr>
+        <tr><td><strong>Loyalty Investor Shield</strong></td><td><span class="score-dot dot-g"></span>High — captive market</td><td><span class="score-dot dot-g"></span>6–12 months</td><td><span class="score-dot dot-y"></span>Medium (micro-premium)</td><td><span class="score-dot dot-y"></span>Medium — property data</td><td><span class="score-dot dot-g"></span>Low</td><td><span class="priority-badge p1">P1</span></td></tr>
+        <tr><td><strong>Compliance &amp; Governance Insurance</strong></td><td><span class="score-dot dot-y"></span>Medium — emerging need</td><td><span class="score-dot dot-y"></span>12–18 months</td><td><span class="score-dot dot-y"></span>Medium–High</td><td><span class="score-dot dot-y"></span>Medium — SaaS layer</td><td><span class="score-dot dot-y"></span>Medium</td><td><span class="priority-badge p2">P2</span></td></tr>
+        <tr><td><strong>Parametric PropTech Platform</strong></td><td><span class="score-dot dot-y"></span>High — but future state</td><td><span class="score-dot dot-r"></span>24–36 months</td><td><span class="score-dot dot-g"></span>Very High (platform)</td><td><span class="score-dot dot-g"></span>Core — real-time AVM</td><td><span class="score-dot dot-r"></span>Very High</td><td><span class="priority-badge p3">P3</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="grid-3" style="margin-top:40px">
+      <div class="card" style="text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🎯</div><div style="font-size:13px;font-weight:700;margin-bottom:8px">Our Recommendation</div><div style="font-size:12px;color:var(--gray);line-height:1.6">Start with Products 2 &amp; 4 simultaneously — they share infrastructure, target the PRYPCO/Apparel ecosystem, and generate early revenue while building actuarial data for the larger B2B products.</div></div>
+      <div class="card" style="text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🤝</div><div style="font-size:13px;font-weight:700;margin-bottom:8px">Strategic Partnership Needed</div><div style="font-size:12px;color:var(--gray);line-height:1.6">Partner with an established UAE insurer (e.g. AXA Gulf, Zurich ME, or ADNIC) as the licensed underwriter — PRYPCO acts as the MGA leveraging its data advantage.</div></div>
+      <div class="card" style="text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🌍</div><div style="font-size:13px;font-weight:700;margin-bottom:8px">Moat is the Data</div><div style="font-size:12px;color:var(--gray);line-height:1.6">Ovaluate's AVM data is the competitive moat. No other insurtech player has access to real-time AI property valuations at this quality. Move before competitors recognise it.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">PRYPCO × OVALUATE · INSURTECH STRATEGY · CONFIDENTIAL</div>
+  <div class="footer-note">Strategic analysis based on verified research from Gulf Business, Zawya, Apparel Group, PRYPCO.com, General Catalyst, and CMS Law · July 2026</div>
+</footer>
+
+<script>
+  function goTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.addEventListener('scroll', () => {
+    const sections = ['hero','partnerships','products','risks','segments','roadmap','recommend','decision'];
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 120) current = id;
+    });
+    const map = {hero:0,partnerships:1,products:2,risks:3,segments:4,roadmap:5,recommend:6,decision:7};
+    document.querySelectorAll('.nav-link').forEach((l,i) => {
+      l.classList.toggle('active', i === map[current]);
+    });
+  });
+
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function showSeg(id) {
+    document.querySelectorAll('.seg-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  const selections = { obj: null, seg: null, time: null };
+
+  function selectOpt(el, group, val) {
+    el.closest('.q-options').querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    selections[group] = val;
+  }
+
+  const products = {
+    p2: { name: 'Fractional Ownership Investment Protection', scores: { fit: 95, speed: 90, revenue: 80, complexity: 30 }, why: 'Your priorities align perfectly with Product 2 — it addresses PRYPCO Blocks retail investors directly, can be launched in 6–12 months via the existing Blocks app, and generates immediate revenue through micro-premiums at the point of block purchase. Ovaluate\'s real-time AVM data provides actuarially sound pricing from day one.' },
+    p4: { name: 'Loyalty Investor Shield (Club Apparel × PRYPCO)', scores: { fit: 88, speed: 92, revenue: 72, complexity: 20 }, why: 'With Club Apparel\'s ~4M member base and the Spend to Invest journey already in place, this is the fastest path to scale. Zero customer acquisition cost, captive audience, and the circular loyalty-insurance loop creates long-term retention. Best for brand differentiation and retail segment priority.' },
+    p1: { name: 'AVM Professional Indemnity Insurance', scores: { fit: 98, speed: 60, revenue: 90, complexity: 60 }, why: 'The RICS AI Standard (March 2026) creates mandatory demand from all RICS-affiliated firms using AI valuations — including Ovaluate\'s entire client base. This is the highest-revenue B2B product, but requires a reinsurer partnership and 12–18 months to launch.' },
+    p3: { name: 'Mortgage Valuation & Lender Protection Suite', scores: { fit: 90, speed: 40, revenue: 95, complexity: 80 }, why: 'PRYPCO\'s $2.73B mortgage pipeline makes this the largest revenue opportunity. However, it requires reinsurance capacity, regulatory approval, and 18–24 months. Best as a Phase 2 product after establishing credibility.' },
+    p5: { name: 'AI Valuation Compliance & Governance Insurance', scores: { fit: 82, speed: 65, revenue: 75, complexity: 55 }, why: 'Embedding compliance insurance into Ovaluate\'s SaaS subscription tiers creates a differentiated B2B product that scales with Ovaluate\'s subscriber growth. The RICS AI Standard (March 2026) creates immediate demand.' },
+    p6: { name: 'Parametric Real Estate Insurance Platform', scores: { fit: 85, speed: 20, revenue: 98, complexity: 95 }, why: 'The long game — using Ovaluate\'s real-time AVM as parametric triggers creates a genuinely novel global product. This is the 2028+ play. Not for fast revenue, but for building the platform that becomes the moat when Ovaluate reaches global scale.' }
+  };
+
+  function runRecommendation() {
+    if (!selections.obj || !selections.seg || !selections.time) { alert('Please answer all three questions first.'); return; }
+    let scores = {};
+    Object.keys(products).forEach(p => {
+      let s = 0;
+      if (selections.obj === 'revenue') s += p==='p3'?30:p==='p1'?25:p==='p6'?20:p==='p2'?22:15;
+      if (selections.obj === 'brand') s += p==='p4'?30:p==='p2'?25:p==='p6'?20:15;
+      if (selections.obj === 'global') s += p==='p6'?30:p==='p5'?25:p==='p1'?20:15;
+      if (selections.obj === 'b2b') s += p==='p1'?30:p==='p3'?28:p==='p5'?25:15;
+      if (selections.seg === 'retail') s += p==='p2'?30:p==='p4'?28:15;
+      if (selections.seg === 'lender') s += p==='p3'?30:p==='p1'?25:15;
+      if (selections.seg === 'b2b') s += p==='p1'?30:p==='p5'?28:15;
+      if (selections.seg === 'govt') s += p==='p5'?30:p==='p6'?22:15;
+      if (selections.time === 'fast') s += p==='p4'?30:p==='p2'?28:p==='p1'?20:p==='p5'?18:10;
+      if (selections.time === 'mid') s += p==='p1'?28:p==='p5'?26:p==='p3'?22:p==='p2'?20:15;
+      if (selections.time === 'long') s += p==='p6'?30:p==='p3'?28:p==='p1'?22:15;
+      scores[p] = s;
+    });
+    const best = Object.keys(scores).sort((a,b) => scores[b]-scores[a])[0];
+    const prod = products[best];
+    document.getElementById('rec-placeholder').style.display = 'none';
+    const out = document.getElementById('rec-output');
+    out.classList.add('show');
+    document.getElementById('rec-name').textContent = prod.name;
+    document.getElementById('rec-why').textContent = prod.why;
+    const scoreLabels = [['Market Fit', prod.scores.fit],['Speed to Market', prod.scores.speed],['Revenue Potential', prod.scores.revenue],['Implementation Ease', 100-prod.scores.complexity]];
+    document.getElementById('rec-scores').innerHTML = scoreLabels.map(([l,v]) =>
+      `<div class="score-bar-label"><span>${l}</span><span>${v}%</span></div><div class="score-bar-track"><div class="score-bar-fill" style="width:${v}%"></div></div>`
+    ).join('');
+    const second = Object.keys(scores).sort((a,b) => scores[b]-scores[a])[1];
+    document.getElementById('rec-next').innerHTML = `<div style="font-size:11px;color:var(--gray);margin-bottom:6px">RUNNER UP</div><div style="font-size:13px;font-weight:600;color:var(--white)">${products[second].name}</div>`;
+  }
+</script>
+</body>
+</html>
